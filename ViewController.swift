@@ -8,26 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController , iCarouselDelegate , iCarouselDataSource  {
-
-    var imgArray :NSMutableArray = NSMutableArray()
-
-    @IBOutlet weak var DisplayView : iCarousel!
+class ViewController: UIViewController , UIWebViewDelegate {
+    
+    @IBOutlet weak var webView : UIWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        imgArray = ["logo.png","s1.png","s3.png","s5.png","s6.jpg"]
-        DisplayView.type = iCarouselType.wheel
-        DisplayView.contentMode = .scaleAspectFit
-        DisplayView.reloadData()
+        webView.delegate = self
+        if let url = URL(string: "http://demosguru.com/perfect/") {
+            let request = URLRequest(url: url)
+            webView.loadRequest(request)
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+   /* func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var imgVw : UIImageView!
         
         if view == nil
@@ -43,6 +42,6 @@ class ViewController: UIViewController , iCarouselDelegate , iCarouselDataSource
     }
     func numberOfItems(in carousel: iCarousel) -> Int {
         return imgArray.count
-    }
+    }*/
     
 }
